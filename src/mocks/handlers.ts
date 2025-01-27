@@ -1,1 +1,3 @@
-export const handlers = [];
+import { NewsHandlers } from './news-handler';
+
+export const handlers = [...NewsHandlers];

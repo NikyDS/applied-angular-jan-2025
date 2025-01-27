@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-
-import { WelcomeComponent } from './components/welcome.component';
+import { NavigationComponent } from './components/navigation.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   template: `
+    <app-navigation />
     <main class="container mx-auto">
-      <app-welcome />
+      <router-outlet />
     </main>
   `,
   styles: [],
-  imports: [WelcomeComponent],
+  imports: [NavigationComponent, RouterOutlet],
 })
 export class AppComponent {}

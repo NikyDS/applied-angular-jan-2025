@@ -1,4 +1,4 @@
-import { Component, VERSION } from '@angular/core';
+import { Component, signal, VERSION } from '@angular/core';
 
 @Component({
   selector: 'app-welcome',
@@ -7,7 +7,8 @@ import { Component, VERSION } from '@angular/core';
     <div class="prose pt-12">
       <h1>Angular Starter</h1>
       <p>Using Angular {{ v.full }}</p>
-
+      <p>Now with hot module replacement!!!!</p>
+      <p>Even more stuff that you don't have.</p>
       <ul>
         <li><a href="https://tailwindcss.com/">Tailwind for CSS</a></li>
         <li><a href="https://daisyui.com/">DaisyUi for UI Library</a></li>
@@ -21,4 +22,6 @@ import { Component, VERSION } from '@angular/core';
 })
 export class WelcomeComponent {
   v = VERSION;
+
+  name = signal('Jeff');
 }

@@ -30,7 +30,9 @@ import { RouterLink } from '@angular/router';
             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li><a routerLink="/">Home</a></li>
-            <li><a routerLink="/resources">Resources</a></li>
+
+            <li><a routerLink="resources">Resources</a></li>
+            <li><a routerLink="demos">Demos</a></li>
           </ul>
         </div>
         <a class="btn btn-ghost text-xl">Applied Angular</a>
@@ -38,7 +40,9 @@ import { RouterLink } from '@angular/router';
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
           <li><a routerLink="/">Home</a></li>
-          <li><a routerLink="/resources">Resources</a></li>
+
+          <li><a routerLink="resources">Resources</a></li>
+          <li><a routerLink="demos">Demos</a></li>
         </ul>
       </div>
       <div class="navbar-end">

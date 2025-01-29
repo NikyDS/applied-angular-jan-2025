@@ -11,4 +11,8 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./demos/demos.routes').then((r) => r.DEMO_ROUTES), // dynamic import
   },
+  {
+    path: 'golf',
+    loadChildren: () => import('./golf/golf.routes').then((r) => r.GOLF_ROUTES),
+  },
 ];

@@ -24,6 +24,12 @@ const fakeNewsItems = [
     description: 'Good Stuff',
     link: 'https://developer.mozilla.org/en-US/',
   },
+  {
+    id: '5',
+    title: 'Typescript Wiz',
+    description: 'Typescript wonderful stuff',
+    link: 'https://www.totaltypescript.com/books/total-typescript-essentials',
+  },
 ];
 
 export const NewsHandlers = [

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -39,10 +39,11 @@ import { RouterLink } from '@angular/router';
       </div>
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
-          <li><a routerLink="/">Home</a></li>
-
-          <li><a routerLink="resources">Resources</a></li>
-          <li><a routerLink="demos">Demos</a></li>
+          @for (link of links(); track link.href) {
+            <li>
+              <a [routerLink]="[link.href]">{{ link.text }}</a>
+            </li>
+          }
         </ul>
       </div>
       <div class="navbar-end">
@@ -52,4 +53,23 @@ import { RouterLink } from '@angular/router';
   `,
   styles: ``,
 })
-export class NavigationComponent {}
+export class NavigationComponent {
+  links = signal([
+    {
+      href: '/',
+      text: 'Home',
+    },
+    {
+      href: 'resources',
+      text: 'Resources',
+    },
+    {
+      href: 'demos',
+      text: 'Demos',
+    },
+    {
+      href: 'golf',
+      text: 'Golf',
+    },
+  ]);
+}

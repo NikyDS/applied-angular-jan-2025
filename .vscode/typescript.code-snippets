@@ -55,6 +55,16 @@
       "]",
     ],
   },
+  "Angular Route App Route": {
+    "scope": "typescript",
+    "prefix": "ngar",
+    "body": [
+      "{",
+      "path: '$1',",
+      "loadChildren: () => import('$2').then((r) => r.$3)",
+      "},",
+    ],
+  },
   "Jasmine Describe": {
     "scope": "typescript",
     "prefix": "desc",

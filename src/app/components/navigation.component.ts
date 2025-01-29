@@ -29,10 +29,11 @@ import { RouterLink } from '@angular/router';
             tabindex="0"
             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li><a routerLink="/">Home</a></li>
-
-            <li><a routerLink="resources">Resources</a></li>
-            <li><a routerLink="demos">Demos</a></li>
+            @for (link of links(); track link.href) {
+              <li>
+                <a [routerLink]="[link.href]">{{ link.text }}</a>
+              </li>
+            }
           </ul>
         </div>
         <a class="btn btn-ghost text-xl">Applied Angular</a>
@@ -70,6 +71,10 @@ export class NavigationComponent {
     {
       href: 'golf',
       text: 'Golf',
+    },
+    {
+      href: 'counter',
+      text: 'Counter',
     },
   ]);
 }

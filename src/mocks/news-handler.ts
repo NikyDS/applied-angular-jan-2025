@@ -1,4 +1,8 @@
 import { http, HttpResponse, delay } from 'msw';
+import {
+  NewsItemCreateModel,
+  NewsItemEntity,
+} from '../app/resources/services/resource.store';
 const fakeNewsItems = [
   {
     id: '1',
@@ -18,23 +22,18 @@ const fakeNewsItems = [
     description: 'Tool for Intercepting and Faking Http Calls',
     link: 'https://mswjs.io',
   },
-  {
-    id: '4',
-    title: "Rainer's YouTube",
-    description: 'Good Stuff',
-    link: 'https://developer.mozilla.org/en-US/',
-  },
-  {
-    id: '5',
-    title: 'Typescript Wiz',
-    description: 'Typescript wonderful stuff',
-    link: 'https://www.totaltypescript.com/books/total-typescript-essentials',
-  },
 ];
 
 export const NewsHandlers = [
   http.get('https://prod32.hypertheory.com/api/news', async () => {
     await delay(2000);
     return HttpResponse.json(fakeNewsItems);
+  }),
+  http.post('https://prod32.hypertheory.com/api/news', async ({ request }) => {
+    await delay(5000);
+    const body = (await request.json()) as unknown as NewsItemCreateModel;
+    const newItem = { ...body, id: crypto.randomUUID() } as NewsItemEntity;
+    fakeNewsItems.push(newItem);
+    return HttpResponse.json(newItem);
   }),
 ];

@@ -1,10 +1,12 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FeatureDirective } from '@shared';
 
 @Component({
   selector: 'app-navigation',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink],
+  imports: [RouterLink, FeatureDirective, RouterLinkActive, UpperCasePipe],
   template: `
     <div class="navbar bg-base-100">
       <div class="navbar-start">
@@ -30,36 +32,63 @@ import { RouterLink } from '@angular/router';
             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             @for (link of links(); track link.href) {
-              <li>
-                <a [routerLink]="[link.href]">{{ link.text }}</a>
-              </li>
+              @if (link.feature) {
+                <li>
+                  <a
+                    routerLinkActive="active"
+                    *feature="link.feature"
+                    [routerLink]="[link.href]"
+                    >{{ link.text }}</a
+                  >
+                </li>
+              } @else {
+                <li>
+                  <a routerLinkActive="active" [routerLink]="[link.href]">{{
+                    link.text
+                  }}</a>
+                </li>
+              }
             }
           </ul>
         </div>
-        <a class="btn btn-ghost text-xl">Applied Angular</a>
+        <a class="btn btn-ghost text-xl" routerLink="">Applied Angular</a>
       </div>
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
           @for (link of links(); track link.href) {
-            <li>
-              <a [routerLink]="[link.href]">{{ link.text }}</a>
-            </li>
+            @if (link.feature) {
+              <li>
+                <a
+                  routerLinkActive="active"
+                  *feature="link.feature"
+                  [routerLink]="[link.href]"
+                  >{{ link.text | uppercase }}</a
+                >
+              </li>
+            } @else {
+              <li>
+                <a routerLinkActive="active" [routerLink]="[link.href]">{{
+                  link.text | uppercase
+                }}</a>
+              </li>
+            }
           }
         </ul>
       </div>
       <div class="navbar-end">
-        <a class="btn">Button</a>
+        <a
+          class="btn"
+          href="https://applied-angular.hypertheory.com"
+          target="_blank"
+          >Site</a
+        >
       </div>
     </div>
   `,
   styles: ``,
 })
 export class NavigationComponent {
-  links = signal([
-    {
-      href: '/',
-      text: 'Home',
-    },
+  links = signal<{ href: string; text: string; feature?: string }[]>([
     {
       href: 'resources',
       text: 'Resources',
@@ -71,10 +100,11 @@ export class NavigationComponent {
     {
       href: 'golf',
       text: 'Golf',
+      feature: 'golf',
     },
     {
-      href: 'counter',
-      text: 'Counter',
+      href: 'jeff-counter',
+      text: 'Counter (Jeff)',
     },
   ]);
 }

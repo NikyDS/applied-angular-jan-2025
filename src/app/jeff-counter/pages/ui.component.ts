@@ -12,33 +12,15 @@ import { CounterStore } from '../services/counter.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: ` <div>
-    <div>
-      <p>Counter increasing/decreasing by {{ store.counterValue() }}</p>
-    </div>
     <button
-      [disabled]="store.noNegatives()"
+      [disabled]="store.decrementShouldBeDisabled()"
       (click)="store.decrement()"
       class="btn btn-primary"
     >
       -
     </button>
-    <span data-testid="current">{{ store.currentValue() }}</span>
+    <span>{{ store.current() }}</span>
     <button (click)="store.increment()" class="btn btn-primary">+</button>
-    @if (store.fizzBuzzMessage() !== '') {
-      <div class="alert alert-info">
-        @switch (store.fizzBuzzMessage()) {
-          @case ('fizz') {
-            <p>fizz</p>
-          }
-          @case ('buzz') {
-            <p>buzz</p>
-          }
-          @case ('fizzbuzz') {
-            <p>fizzbuzz</p>
-          }
-        }
-      </div>
-    }
   </div>`,
   styles: ``,
 })

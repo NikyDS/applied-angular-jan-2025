@@ -1,24 +1,33 @@
 import { Routes } from '@angular/router';
 import { ResourcesComponent } from './resources/resources.component';
-import { CounterComponent } from './counter/counter.component';
+import { canMatchFeature } from '@shared';
 
 export const routes: Routes = [
   {
     path: 'resources',
-    component: ResourcesComponent,
+    loadChildren: () =>
+      import('./resources/resources.routes').then((r) => r.RESOURCE_ROUTES),
   },
   {
     path: 'demos',
+    data: {
+      preload: true,
+    },
     loadChildren: () =>
       import('./demos/demos.routes').then((r) => r.DEMO_ROUTES), // dynamic import
   },
+
   {
     path: 'golf',
+    canMatch: [canMatchFeature('golf')],
     loadChildren: () => import('./golf/golf.routes').then((r) => r.GOLF_ROUTES),
   },
   {
-    path: 'counter',
+    path: 'jeff-counter',
+    data: {
+      preload: true,
+    },
     loadChildren: () =>
-      import('./counter/counter.routes').then((r) => r.COUNTER_ROUTES),
+      import('./jeff-counter/counter.routes').then((r) => r.COUNTER_ROUTES),
   },
 ];

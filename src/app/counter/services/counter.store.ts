@@ -2,13 +2,20 @@ import { computed } from '@angular/core';
 import {
   patchState,
   signalStore,
+  watchState,
   withComputed,
+  withHooks,
   withMethods,
   withState,
 } from '@ngrx/signals';
 
+type CounterState = {
+  counterValue: number;
+  currentValue: number;
+};
+
 export const CounterStore = signalStore(
-  withState({
+  withState<CounterState>({
     currentValue: 0,
     counterValue: 1,
   }),
@@ -53,5 +60,21 @@ export const CounterStore = signalStore(
         return '';
       }),
     };
+  }),
+  withHooks({
+    onInit(store) {
+      console.log('The Counter Store Has been Created');
+      const savedState = localStorage.getItem('counter-state');
+      if (savedState !== null) {
+        const state = JSON.parse(savedState) as unknown as CounterState;
+        patchState(store, state);
+      }
+      watchState(store, (state) => {
+        localStorage.setItem('counter-state', JSON.stringify(state));
+      });
+    },
+    onDestroy(store) {
+      console.log('The Counter Store has been DESTROYED');
+    },
   }),
 );

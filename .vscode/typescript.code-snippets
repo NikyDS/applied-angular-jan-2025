@@ -41,6 +41,17 @@
     ],
     "description": "Angular Standalone Component",
   },
+  "Angular Route App Route": {
+    "scope": "typescript",
+    "prefix": "ngar",
+    "body": [
+      "{",
+      "path: '$1',",
+      "loadChildren: () => import('$2').then((r) => r.$3)",
+      "},",
+    ],
+  },
+
   "Angular Routes": {
     "scope": "typescript",
     "prefix": "ngfr",
@@ -53,16 +64,6 @@
       "\t\tchildren: []",
       "\t}",
       "]",
-    ],
-  },
-  "Angular Route App Route": {
-    "scope": "typescript",
-    "prefix": "ngar",
-    "body": [
-      "{",
-      "path: '$1',",
-      "loadChildren: () => import('$2').then((r) => r.$3)",
-      "},",
     ],
   },
   "Jasmine Describe": {
